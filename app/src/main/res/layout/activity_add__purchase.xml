@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".Add_Purchase_Activity">
+
+
+    <EditText
+        android:id="@+id/editText_Product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Product Type"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editText_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText_Product"
+
+        android:layout_weight="1"
+        android:hint="Price"
+        android:inputType="number" />
+
+
+    <TextView
+        android:id="@+id/mounthtextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText_price"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Month"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+
+    <TextView
+
+        android:id="@+id/daytextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:layout_alignStart="@+id/numberpicker_Day"
+        android:layout_below="@+id/editText_price"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+
+        android:layout_marginRight="16dp"
+        android:layout_toRightOf="@+id/mounthtextview"
+        android:text="Day"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <NumberPicker
+        android:id="@+id/numberpicker_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mounthtextview"
+
+        android:layout_marginRight="16dp"
+
+        />
+
+    <NumberPicker
+        android:id="@+id/numberpicker_Day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/daytextview"
+        android:layout_marginRight="16dp"
+
+        android:layout_toRightOf="@+id/numberpicker_month" />
+
+
+</RelativeLayout>
