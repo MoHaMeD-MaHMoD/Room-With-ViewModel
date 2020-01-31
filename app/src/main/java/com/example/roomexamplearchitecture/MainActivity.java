@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         myViewModel.getAllPurchases().observe(this, new Observer<List<Purchases>>() {
             @Override
             public void onChanged(@Nullable List<Purchases> purchases) {
-                Toast.makeText(MainActivity.this, "dsfdsf", LENGTH_LONG).show();
                 adpter.set_Purchase(purchases);
             }
         });
@@ -58,6 +58,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, SAVE_PURCHASE_REQUEST);
             }
         });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT
+                | ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
+                myViewModel.delete(adpter.getPurchaseAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(MainActivity.this, "Product Deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(recyclerView);
+
+
     }
 
     @Override
@@ -72,6 +89,26 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Product saved", LENGTH_LONG).show();
         } else {
             Toast.makeText(MainActivity.this, "Product not saved", LENGTH_LONG).show();
+
+
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete_all:
+                myViewModel.deleteAllPurchases();
+                Toast.makeText(this, "All note Deleted", Toast.LENGTH_SHORT).show();
+            default:
+                return super.onOptionsItemSelected(item);
 
 
         }

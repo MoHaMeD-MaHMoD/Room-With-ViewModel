@@ -47,6 +47,10 @@ public class PurchasesAdpter extends RecyclerView.Adapter<PurchasesAdpter.Purcha
 
     }
 
+    public Purchases getPurchaseAt(int position){
+        return purchasesList.get(position);
+    }
+
     class PurchaseHolder extends RecyclerView.ViewHolder {
         private TextView productView;
         private TextView priceview;
